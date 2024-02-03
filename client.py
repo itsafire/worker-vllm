@@ -1,25 +1,26 @@
-import os
+import os, json
 from argparse import ArgumentParser
 
 import runpod
 
 ENDPOINTS = {
     'mistral': 'ez6y7mp148jscf',
-    'tinyllama': '3w0sgvd0blkzbi'
+    'tinyllama': 'o3k3v8rv7e0cov'
 }
 
 def query_llm(prompt: str, model: str):
     runpod.api_key = os.getenv('API_KEY')
     endpoint = runpod.Endpoint(ENDPOINTS[model])
 
-    run_request = endpoint.run_sync(
+    run_request = endpoint.run(
         {
             "input": {
                 "prompt": "Hello, my name is",
             }
         }
     )
-    return run_request
+    output = run_request.output()
+    return output
 
 if __name__ == '__main__':
     parser = ArgumentParser()

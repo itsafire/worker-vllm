@@ -7,5 +7,5 @@ if [ $# -eq 0 ]; then
     echo "No arguments supplied"
     exit 1
 fi
-docker run -ti --rm -v ./client-functions:/client-functions --env-file .env client $1 "$2"
+docker run -ti --rm --env-file .env client $1 "$2"
 
