@@ -1,7 +1,12 @@
 FROM python:3.11
 
-RUN pip install runpod
+ENV API_KEY="set-in-.env"
 
-RUN echo "Excpetion('Please mount your client.py on /client.py')" > /client.py
+RUN pip install runpod python-dotenv
 
-CMD python /client.py
+USER games
+WORKDIR /client
+
+ADD client.py client.py
+
+ENTRYPOINT ["python", "/client/client.py"] 
